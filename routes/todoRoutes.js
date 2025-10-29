@@ -28,7 +28,7 @@ module.exports = app => {
   });
 
   // Update todo and clear cache
-  app.put('/api/todo/:id', async (req, res) => {
+  app.put('/api/todos/:id', async (req, res) => {
     try {
       const todo = await Todo.findByIdAndUpdate(req.params.id, req.body, { new: true });
       clearKey(Todo.collection.collectionName);
