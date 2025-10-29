@@ -22,6 +22,8 @@ const ready = mongoose
   .connect(keys.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    // Fail faster when Mongo isn't reachable (shorten server selection timeout)
+    serverSelectionTimeoutMS: 5000,
   })
   .then(() => {
     // register routes after DB connection
