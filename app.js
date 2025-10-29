@@ -18,6 +18,8 @@ app.get('/api/health', (req, res) => {
 });
 
 // Connect to MongoDB
+// Disable deprecated findAndModify (used by findOneAndUpdate / findOneAndDelete)
+mongoose.set('useFindAndModify', false);
 const ready = mongoose
   .connect(keys.mongoURI, {
     useNewUrlParser: true,

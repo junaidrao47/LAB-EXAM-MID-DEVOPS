@@ -9,6 +9,8 @@ WORKDIR "/app"
 COPY package*.json ./
 
 RUN npm install
+# alpine images don't include curl by default; install it so healthchecks using curl work
+RUN apk add --no-cache curl
 # If you are building your code for production
 # RUN npm ci --only=production
 

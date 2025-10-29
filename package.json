@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "jest --runInBand",
+    "test": "cross-env NODE_ENV=test jest --runInBand",
   "lint": "eslint . --ext .js"
   },
   "license": "MIT",
@@ -21,6 +21,7 @@
   "devDependencies": {
     "eslint": "^9.38.0",
     "jest": "^30.2.0",
+    "cross-env": "^7.0.3",
     "nodemon": "^3.1.10",
     "supertest": "^7.1.4"
   }
