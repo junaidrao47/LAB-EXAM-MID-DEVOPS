@@ -1,0 +1,65 @@
+version: "3"
+services:
+  mongo:
+    image: "mongo:latest"
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongo-data:/data/db
+  redis:
+    image: "redis:latest"
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+  server:
+    ports:
+      - "5000:5000"
+    build:
+      dockerfile: Dockerfile
+      context: ./
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - MONGO_DB_NAME=library
+      - MONGO_PORT=27017
+      - MONGO_HOST=mongo
+    links:
+      - mongo
+      - redis
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:5000/api/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    ports:
+      - "9090:9090"
+    depends_on:
+      - server
+    networks:
+      - devnet
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+    networks:
+      - devnet
+
+volumes:
+  mongo-data:
+    driver: local
+  redis-data:
+    driver: local
+
+networks:
+  devnet:
+    driver: bridge
