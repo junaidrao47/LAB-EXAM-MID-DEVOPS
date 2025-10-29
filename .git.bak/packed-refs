@@ -1,6 +1,0 @@
-# pack-refs with: peeled fully-peeled sorted 
-a6c165006ec9aa75d730b1e894c9321a679b27d1 refs/remotes/origin/dependabot/npm_and_yarn/bson-1.1.6
-2251dbe30cd9f70d885fa278407f63ab89524fb6 refs/remotes/origin/dependabot/npm_and_yarn/express-4.17.3
-3a72fc90eb3d48daacd9a7a9d7ff3c8c2dacf77f refs/remotes/origin/dependabot/npm_and_yarn/qs-and-body-parser-and-express-6.11.0
-a53bea7ee0741c28b859a35ec550a0927c789f59 refs/remotes/origin/dependabot/npm_and_yarn/redis-3.1.1
-edccfa8d9ec91f63fff1ecf4a67e39acb3e0b613 refs/remotes/origin/master
