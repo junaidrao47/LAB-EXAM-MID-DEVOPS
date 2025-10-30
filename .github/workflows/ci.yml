@@ -76,7 +76,7 @@ jobs:
           REDIS_HOST: localhost
           REDIS_PORT: 6379
           NODE_ENV: test
-        run: npm test -- --runInBand --detectOpenHandles
+        run: npm test -- --runInBand --detectOpenHandles --forceExit
 
   build:
     name: Build & Push Docker Image
