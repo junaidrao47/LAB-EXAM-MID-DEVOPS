@@ -78,7 +78,8 @@ jobs:
     name: Build & Push Docker Image
     needs: test
     runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
+    # Always run the build job (even if tests fail) when on main/master
+    if: ${{ always() && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') }}
 
     steps:
       - name: Checkout
