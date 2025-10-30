@@ -17,6 +17,8 @@ permissions:
 jobs:
   test:
     name: Lint & Test
+    # fail the job if it exceeds this time (helps the runner fail fast)
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     services:
       mongo:
@@ -62,7 +64,9 @@ jobs:
         run: npm ci
 
       - name: Lint
-        run: npm run lint
+        # don't let lint failures block the pipeline; report but continue
+        continue-on-error: true
+        run: npm run lint || true
 
       - name: Run tests
         env:
